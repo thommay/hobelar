@@ -3,15 +3,15 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.rubygems_version = '1.3.5'
 
-  s.name "hobelar"
-  s.version "0.0.1"
+  s.name = "hobelar"
+  s.version = "0.0.1"
 
-  s.summary "reconnoiter rest interface wrapper"
-  s.description "Hobelar talks to reconnoiter's noit rest interface"
+  s.summary = "reconnoiter rest interface wrapper"
+  s.description = "Hobelar talks to reconnoiter's noit rest interface"
 
-  s.authors["Thom May"]
-  s.email "thom@clearairturbulence.org"
-  s.homepage "https://github.com/thommay/hobelar"
+  s.authors = ["Thom May"]
+  s.email = "thom@clearairturbulence.org"
+  s.homepage = "https://github.com/thommay/hobelar"
 
   s.require_paths = %w[lib]
 
@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   ## that are needed for an end user to actually USE your code.
   s.add_dependency('builder')
   s.add_dependency('excon', '>=0.5.5')
-  s.add_dependency('formatador', '>=0.1.1')
+  s.add_dependency('nokogiri', '>=1.4.4')
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
