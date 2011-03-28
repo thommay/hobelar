@@ -1,6 +1,7 @@
 = hobelar
 
 Hobelar talks to {Reconnoiter's}[http://labs.omniti.com/labs/reconnoiter] REST interface.
+The name comes from a variety of light cavalry, originally from Ireland, used for skirmishing and reconnaissance.
 
 == Getting Started
 
