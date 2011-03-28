@@ -30,7 +30,7 @@ If you don't have a valid CA, you'll need to disable peer validation when instan
 
 (The MIT License)
 
-Copyright (c) 2010 {Thom May}[http://github.com/thommay]
+Copyright (c) 2011 {Thom May}[http://github.com/thommay]
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
