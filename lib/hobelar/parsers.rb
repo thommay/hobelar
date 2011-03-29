@@ -24,3 +24,4 @@ class Hobelar
 end
 
 require 'hobelar/parsers/getcheck.rb'
+require 'hobelar/parsers/getfilter.rb'

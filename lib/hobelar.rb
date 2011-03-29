@@ -60,15 +60,26 @@ class Hobelar
   end
 
   def get_filter(set, path=nil)
-  
+    p = path ? "/filters/show/#{path}/#{set}" : "/filters/show/#{set}" 
+    request({:method=>"GET", :path=>p, :parser => Hobelar::Parsers::GetFilter.new})
   end
   
   def set_filter(set, rules, path=nil)
-  
+    p = path ? "/filters/set/#{path}/#{set}" : "/filters/set/#{set}" 
+    r = ""
+    rules.each do |rule|
+      r += "<rule type=\"#{rule[:type]}\" module=\"#{rule[:module]}\" metric=\"#{rule[:metric]}\" />"
+    end
+
+    body = "<?xml version=\"1.0\" encoding=\"utf8\"?><filterset>#{r}</filterset>"
+    request({:method=>"PUT", :path=>p, :body => body, :parser => Hobelar::Parsers::GetFilter.new})
   end
   
+  # deleting filters doesn't actually appear to work; the API gives the correct response
+  # but nothing happens
   def del_filter(set, path=nil)
-  
+    p = path ? "/filters/delete/#{path}/#{set}" : "/filters/delete/#{set}" 
+    request({:method=>"DELETE", :path=>p})
   end
   
   def request(params, &block)
