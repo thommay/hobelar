@@ -1,28 +1,19 @@
 class Hobelar
   class Parsers
-    class GetCheck < Nokogiri::XML::SAX::Document
+    class GetCheck < Hobelar::Parsers
 
       attr_reader :response
 
       def initialize
-        @response = {}
+        super
         @response[:attributes] = {}
         @response[:config] = {}
         @response[:state] = {}
         @response[:state][:metrics] = {}
       end
 
-      def characters(string)
-        @value ||= ''
-        @value << string.strip
-      end
-
-      def attr_value(name, attrs)
-        (entry = attrs.detect {|a,v| a == name }) && entry.last
-      end
-      
       def start_element(name, attrs = [])
-        @value = nil
+        super
 
         case name
         when "attributes"
