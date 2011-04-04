@@ -28,7 +28,6 @@ class Hobelar
   def set_check(uuid, attrs, path=nil)
     p = path ? "/checks/set/#{path}/#{uuid}" : "/checks/set/#{uuid}" 
     if (c = attrs.delete(:config))
-      puts c
       config = "<config>"
       c.each_pair do |k,v|
         key = k.to_s.downcase
@@ -48,7 +47,7 @@ class Hobelar
     attributes += "</attributes>"
 
     body = "<?xml version=\"1.0\" encoding=\"utf8\"?><check>#{attributes}"
-    body += config.nil? ? "<config/>" : config
+    body += config if config
     body += "</check>"
 
     request({:method=>"PUT", :path=>p, :body => body, :parser => Hobelar::Parsers::GetCheck.new})
