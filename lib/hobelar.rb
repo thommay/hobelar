@@ -6,7 +6,7 @@ require 'hobelar/parsers'
 class Hobelar
 
   unless const_defined?(:VERSION)
-    VERSION = "0.0.1"
+    VERSION = "0.0.4"
   end
 
   attr_accessor :noit, :cert, :key
