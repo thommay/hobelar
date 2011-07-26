@@ -50,7 +50,7 @@ class Hobelar
     body += config if config
     body += "</check>"
 
-    request({:method=>"PUT", :path=>p, :body => body, :parser => Hobelar::Parsers::GetCheck.new})
+    request({:method=>"PUT", :path=>p, :body => body, :parser => Hobelar::Parsers::GetCheck.new, :expects =>200})
   end
 
   def del_check(uuid, path=nil)
@@ -71,7 +71,7 @@ class Hobelar
     end
 
     body = "<?xml version=\"1.0\" encoding=\"utf8\"?><filterset>#{r}</filterset>"
-    request({:method=>"PUT", :path=>p, :body => body, :parser => Hobelar::Parsers::GetFilter.new})
+    request({:method=>"PUT", :path=>p, :body => body, :parser => Hobelar::Parsers::GetFilter.new, :expects =>200})
   end
   
   # deleting filters doesn't actually appear to work; the API gives the correct response
@@ -90,7 +90,12 @@ class Hobelar
       end
     end
 
-    response = @connect.request(params, &block)
+    begin
+      response = @connect.request(params, &block)
+    rescue Excon::Errors::InternalServerError => error
+      raise Hobelar::InternalServerError, error.response.body
+    end
+      
     
     case response.status
     when 200
@@ -101,9 +106,11 @@ class Hobelar
 
       response
     when 404
-      raise Hobelar::NotFound
+      raise Hobelar::NotFound, response.body
     when 403
-      raise Hobelar::PermissionDenied
+      raise Hobelar::PermissionDenied, response.body
+    when 500
+      raise Hobelar::InternalServerError, response.body
     end
   end
 

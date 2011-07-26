@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = '1.3.5'
 
   s.name = "hobelar"
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.summary = "reconnoiter rest interface wrapper"
   s.description = "Hobelar talks to reconnoiter's noit rest interface"
