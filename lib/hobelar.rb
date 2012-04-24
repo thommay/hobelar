@@ -12,10 +12,12 @@ class Hobelar
   attr_accessor :noit, :cert, :key
   attr_reader :connect
 
-  def initialize(noit, cert, key, opts={})
+  def initialize(noit, cert, key, ca_file, opts={})
     @noit = noit
     @cert = cert
     @key = key
+    @ca_file = ca_file
+    Excon.defaults[:ssl_ca_file] = @ca_file
     @connect = Excon.new(noit, {:client_cert => @cert, :client_key => @key })
     Excon.ssl_verify_peer = false if opts[:no_peer]
   end
