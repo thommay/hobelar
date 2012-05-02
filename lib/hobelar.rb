@@ -18,8 +18,8 @@ class Hobelar
     @key = key
     @ca_file = ca_file
     Excon.defaults[:ssl_ca_file] = @ca_file
-    @connect = Excon.new(noit, {:client_cert => @cert, :client_key => @key })
     Excon.ssl_verify_peer = false if opts[:no_peer]
+    @connect = Excon.new(noit, {:client_cert => @cert, :client_key => @key })
   end
 
   def get_check(uuid, path=nil)
