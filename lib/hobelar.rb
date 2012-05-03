@@ -85,19 +85,20 @@ class Hobelar
   
   def request(params, &block)
 
-    unless block_given?
+    if block_given?
+      params[:response_block] = block
+    else
       if (parser = params.delete(:parser))
         body = Nokogiri::XML::SAX::PushParser.new(parser)
-        block = lambda { |chunk, remaining, total| body << chunk }
+        params[:response_block] = lambda { |chunk, remaining, total| body << chunk }
       end
     end
 
     begin
-      response = @connect.request(params, &block)
+      response = @connect.request(params)
     rescue Excon::Errors::InternalServerError => error
       raise Hobelar::InternalServerError, error.response.body
     end
-      
     
     case response.status
     when 200
