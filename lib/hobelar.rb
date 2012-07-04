@@ -30,7 +30,12 @@ class Hobelar
   def set_check(uuid, attrs, path=nil)
     p = path ? "/checks/set/#{path}/#{uuid}" : "/checks/set/#{uuid}" 
     if (c = attrs.delete(:config))
-      config = "<config>"
+      if c.has_key?(:inherit)
+        config = "<config inherit='#{c[:inherit]}'>"
+        c.delete(:inherit)
+      else
+        config = "<config>"
+      end
       c.each_pair do |k,v|
         key = k.to_s.downcase
         config += "<#{key}>#{v}</#{key}>"
