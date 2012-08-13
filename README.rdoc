@@ -23,6 +23,8 @@ Supported operations are #get_check, #set_check and #del_check. All operations t
    :target => "x.x.x.x" }
   h.set_check(uuid, attributes)
 
+If you specify an <tt>:inherit</tt> config key, it will use the value of that key for explicit config inheritance.
+
 If you don't have a valid CA, you'll need to disable peer validation when instantiating Hobelar 
 
   h = Hobelar.new("https://localhost:43191","client.crt","client.key", no_peer: true)) 
